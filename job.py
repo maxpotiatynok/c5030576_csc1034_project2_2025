@@ -31,8 +31,8 @@ def __hash__(self):
     return hash(self.name)
 pass
 def __str__(self):
-    print(f"{self.name} {self.category} {self.rate} {self.date} {self.hours}")
+    return f'Job: {self.name}, {self.category}, {self.rate}, {self.date}, {self.hours}'
 pass
 def __repr__(self):
-    print(self.name, self.category, self.rate, self.date, self.hours)
+    return f'Job({self.name}, {self.category}, {self.rate}, {self.date}, {self.hours})'
 pass
