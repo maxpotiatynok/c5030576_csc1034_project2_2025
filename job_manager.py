@@ -57,7 +57,14 @@ class JobManager:
         return suitable_jobs
 
     def get_total_cost_per_name(self, names):
-        pass
+        name_cost_dict = {}
+        for job in self.jobs:
+            if job.getname() in names:
+                if job.getname() not in name_cost_dict:
+                    name_cost_dict[job.getname()] = job.get_rate() * job.get_hours()
+                else:
+                    name_cost_dict[job.getname()] += job.get_rate() * job.get_hours()
+        return name_cost_dict
 
     def get_category_count_per_name(self):
         pass
