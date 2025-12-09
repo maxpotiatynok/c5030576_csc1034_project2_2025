@@ -31,10 +31,16 @@ class JobManager:
             Exception('Job does not exist')
 
     def edit_job(self, old_job, new_job):
-        pass
+        if old_job in self.jobs:
+            self.jobs.remove_job(old_job)
+            self.jobs.add_job(new_job)
 
     def search_by_category(self, category):
-        pass
+        suitable_jobs = []
+        for job in self.jobs:
+            if job.getcategory() == category:
+                suitable_jobs.append(job)
+        return suitable_jobs
 
     def search_by_rate(self, rate):
         pass
