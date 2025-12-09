@@ -16,10 +16,19 @@ class JobManager:
         return f"Job manager({self.jobs})"
 
     def add_job(self, job):
-        pass
+        if job not in self.jobs:
+            workers_hours = 0
+            for j in self.jobs:
+                if j.getname() == job.getname():
+                    workers_hours += j.get_hours()
+        else:
+            Exception('Job already exists')
 
     def remove_job(self, job):
-        pass
+        if job in self.jobs:
+            self.jobs.remove(job)
+        else:
+            Exception('Job does not exist')
 
     def edit_job(self, old_job, new_job):
         pass
