@@ -67,7 +67,17 @@ class JobManager:
         return name_cost_dict
 
     def get_category_count_per_name(self):
-        pass
+        cat_c_n_dict = {}
+        for job in self.jobs:
+            if job.name not in cat_c_n_dict:
+                cat = 0
+                cat_j_dict = {}
+                for category in job.categories:
+                    if job.category == category:
+                        cat = cat + 1
+                cat_j_dict[job.category] = cat
+                cat_c_n_dict[job.category] = cat_j_dict[job.category]
+        return cat_c_n_dict
 
     def load_from_file(self, file_name):
         pass
