@@ -43,7 +43,11 @@ class JobManager:
         return suitable_jobs
 
     def search_by_rate(self, rate):
-        pass
+        suitable_jobs = []
+        for job in self.jobs:
+            if job.getrate() == rate:
+                suitable_jobs.append(job)
+        return suitable_jobs
 
     def search_by_name_and_date(self, name, date):
         pass
