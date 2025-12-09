@@ -50,7 +50,11 @@ class JobManager:
         return suitable_jobs
 
     def search_by_name_and_date(self, name, date):
-        pass
+        suitable_jobs = []
+        for job in self.jobs:
+            if job.getname() == name and job.getdate() == date:
+                suitable_jobs.append(job)
+        return suitable_jobs
 
     def get_total_cost_per_name(self, names):
         pass
