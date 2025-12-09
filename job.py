@@ -1,49 +1,49 @@
 class Job:
     def __init__(self, name, category, rate, date, hours):
-        self.name = name
-        self.category = category
+        self.__name = name
+        self.__category = category
         if rate > 0: # Should be positive
-            self.rate = rate
+            self.__rate = rate
         else:
             Exception('rate must be positive')
-        self.date = date
+        self.__date = date
         if 0 < hours <= 6: # Should be positive and no more than 6
-            self.hours = hours
+            self.__hours = hours
         else:
             Exception('hours must be between 0 and 6')
 
     def get_name(self):
-        return self.name
+        return self.__name
 
     def get_category(self):
-        return self.category
+        return self.__category
 
     def get_rate(self):
-        return self.rate
+        return self.__rate
 
     def get_date(self):
-        return self.date
+        return self.__date
 
     def get_hours(self):
-        return self.hours
+        return self.__hours
 
     # Method to check if two objects of Job class are equal
     # Returns a boolean value(either True or False)
     def __eq__(self, other):
-        if self.name == other.name:
+        if self.__name == other.name:
             return True
         else:
             return False
 
     # Returns an object's has value(integer)
     def __hash__(self):
-        return hash(self.name)
+        return hash(self.__name)
 
     # String representation
     def __str__(self):
-        return f'Job: {self.name}, {self.category}, {self.rate}, {self.date}, {self.hours}'
+        return f'Job: {self.__name}, {self.__category}, {self.__rate}, {self.__date}, {self.__hours}'
 
     # Formal string representation for developers
     def __repr__(self):
-        return f'Job({self.name}, {self.category}, {self.rate}, {self.date}, {self.hours})'
+        return f'Job({self.__name}, {self.__category}, {self.__rate}, {self.__date}, {self.__hours})'
 
