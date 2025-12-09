@@ -6,25 +6,25 @@ class JobManager:
         # meaning it can be null
         # if so, the list of jobs will be empty
         if jobs is None:
-            self.jobs = []
+            self.__jobs = []
         else:
-            self.jobs = jobs
+            self.__jobs = jobs
 
     def get_jobs(self):
-        return self.jobs
+        return self.__jobs
 
     # String representation
     def __str__(self): #
-        return f"Job manager: {self.jobs}"
+        return f"Job manager: {self.__jobs}"
 
     # Formal string representation for developers
     def __repr__(self):
-        return f"Job manager({self.jobs})"
+        return f"Job manager({self.__jobs})"
 
     def add_job(self, job):
-        if job not in self.jobs:
+        if job not in self.__jobs:
             workers_hours = 0
-            for j in self.jobs:
+            for j in self.__jobs:
                 # Check if such job already exists
                 if j.getname() == job.getname():
                     workers_hours += j.get_hours()
@@ -32,41 +32,41 @@ class JobManager:
             Exception('Job already exists')
 
     def remove_job(self, job):
-        if job in self.jobs:
-            self.jobs.remove(job)
+        if job in self.__jobs:
+            self.__jobs.remove(job)
         else:
             Exception('Job does not exist')
 
     # Replace old job with the new one
     def edit_job(self, old_job, new_job):
-        if old_job in self.jobs:
-            self.jobs.remove_job(old_job)
-            self.jobs.add_job(new_job)
+        if old_job in self.__jobs:
+            self.__jobs.remove_job(old_job)
+            self.__jobs.add_job(new_job)
 
     def search_by_category(self, category):
         suitable_jobs = []
-        for job in self.jobs:
+        for job in self.__jobs:
             if job.getcategory() == category:
                 suitable_jobs.append(job)
         return suitable_jobs
 
     def search_by_rate(self, rate):
         suitable_jobs = []
-        for job in self.jobs:
+        for job in self.__jobs:
             if job.getrate() == rate:
                 suitable_jobs.append(job)
         return suitable_jobs
 
     def search_by_name_and_date(self, name, date):
         suitable_jobs = []
-        for job in self.jobs:
+        for job in self.__jobs:
             if job.getname() == name and job.getdate() == date:
                 suitable_jobs.append(job)
         return suitable_jobs
 
     def get_total_cost_per_name(self, names):
         name_cost_dict = {}
-        for job in self.jobs:
+        for job in self.__jobs:
             if job.getname() in names:
                 if job.getname() not in name_cost_dict:
                     # Check if name is in the dictionary
@@ -79,7 +79,7 @@ class JobManager:
 
     def get_category_count_per_name(self):
         cat_c_n_dict = {}
-        for job in self.jobs:
+        for job in self.__jobs:
             if job.name not in cat_c_n_dict:
                 cat = 0
                 cat_j_dict = {}
