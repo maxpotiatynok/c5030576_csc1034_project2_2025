@@ -1,6 +1,10 @@
 class JobManager:
 
+    # Constructor
     def __init__(self, jobs=None):
+        # jobs is an optional parameter
+        # meaning it can be null
+        # if so, the list of jobs will be empty
         if jobs is None:
             self.jobs = []
         else:
@@ -9,9 +13,11 @@ class JobManager:
     def get_jobs(self):
         return self.jobs
 
-    def __str__(self):
+    # String representation
+    def __str__(self): #
         return f"Job manager: {self.jobs}"
 
+    # Formal string representation for developers
     def __repr__(self):
         return f"Job manager({self.jobs})"
 
@@ -19,6 +25,7 @@ class JobManager:
         if job not in self.jobs:
             workers_hours = 0
             for j in self.jobs:
+                # Check if such job already exists
                 if j.getname() == job.getname():
                     workers_hours += j.get_hours()
         else:
@@ -30,6 +37,7 @@ class JobManager:
         else:
             Exception('Job does not exist')
 
+    # Replace old job with the new one
     def edit_job(self, old_job, new_job):
         if old_job in self.jobs:
             self.jobs.remove_job(old_job)
@@ -61,8 +69,11 @@ class JobManager:
         for job in self.jobs:
             if job.getname() in names:
                 if job.getname() not in name_cost_dict:
+                    # Check if name is in the dictionary
+                    # if not - create a new key-value pair
                     name_cost_dict[job.getname()] = job.get_rate() * job.get_hours()
                 else:
+                    #if the pair exists, add job cost to the total cost
                     name_cost_dict[job.getname()] += job.get_rate() * job.get_hours()
         return name_cost_dict
 
@@ -74,6 +85,7 @@ class JobManager:
                 cat_j_dict = {}
                 for category in job.categories:
                     if job.category == category:
+                        # Count the amount of jobs in the same category for the same name
                         cat = cat + 1
                 cat_j_dict[job.category] = cat
                 cat_c_n_dict[job.category] = cat_j_dict[job.category]
