@@ -1,0 +1,4 @@
+# Gitignore .venv
+.venv
+# Ignore language folder
+Python 3.13(c5030576_csc1034_project2_2025)
