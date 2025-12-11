@@ -1,17 +1,32 @@
 class Job:
     # Constructor
     def __init__(self, name, category, rate, date, hours):
-        self.__name = name
-        self.__category = category
-        if rate > 0: # Should be positive
-            self.__rate = rate
+        if isinstance(name, str): # Check if name is a string
+            self.__name = name
         else:
-            Exception('rate must be positive') # Throw an exception if the rate is negative or zero
-        self.__date = date
-        if 0 < hours <= 6: # Should be positive and no more than 6
-            self.__hours = hours
+            Exception("Name must be a string")
+        if isinstance(category, str): # Check if category is a string
+            self.__category = category
         else:
-            Exception('hours must be between 0 and 6') # Throw an exception if the number of hours is more than 6
+            Exception("Category must be a string")
+        if isinstance(rate, float): # Check if rate is a float
+            if rate > 0: # Should be positive
+                self.__rate = rate
+            else:
+                Exception("Rate must be positive")
+        else:
+            Exception("Rate must be a float")
+        if isinstance(date, str): # Check if date is a string
+            self.__date = date
+        else:
+            Exception("Date must be a string")
+        if isinstance(hours, int): # Check if hours is an integer
+            if 0 < hours <= 6: # Should be positive and no more than 6
+                self.__hours = hours
+            else:
+                Exception('hours must be between 0 and 6') # Throw an exception if the number of hours is more than 6
+        else :
+            Exception("Hours must be an integer")
 
     # Get name
     def get_name(self):
