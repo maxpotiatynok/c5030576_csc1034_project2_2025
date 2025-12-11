@@ -118,4 +118,10 @@ class JobManager:
 
     # Write jobs from the jobs list to a file
     def save_to_file(self, file_name):
-        pass
+        list_count = 0 # Count each job object in the jobs list
+        with open(file_name, "w", newline=' ') as csv_file: # Write each row into a file
+            writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_NONE)
+            for row in writer:
+                if not row: # Write only in empty rows
+                    writer.writerow(self.__jobs[list_count]) # Add a job to a file
+                    list_count += 1 # Increment the jobs list counter
