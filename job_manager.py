@@ -1,5 +1,10 @@
-class JobManager:
+import csv
 
+from job import Job
+
+
+class JobManager:
+    import csv
     # Constructor
     def __init__(self, jobs=None):
         # jobs is an optional parameter
@@ -52,7 +57,7 @@ class JobManager:
         for job in self.__jobs:
             if job.getcategory() == category:
                 suitable_jobs.append(job)
-        return suitable_jobs # Returns all matching jobs
+        return suitable_jobs # Return all matching jobs
 
 
     # Search jobs by rate
@@ -102,7 +107,14 @@ class JobManager:
 
     # Read a file and add jobs from the file to the jobs list
     def load_from_file(self, file_name):
-        pass
+        with open(file_name, "r", newline=' ') as csv_file: # Read each row from a file
+            reader = csv.reader(csv_file, delimiter=',', quoting=csv.QUOTE_NONE) # Separate columns with comma and without quotation marks
+            next(reader) # Skip the first row
+            for row in reader:
+                if row != [] and len(row) == 5: # The row should not be empty and have less than 5 columns
+                    self.add_job(Job(row[0], row[1], row[2], row[3], row[4])) # create a job object with parameters from the file
+                else:
+                    Exception('Invalid row')
 
     # Write jobs from the jobs list to a file
     def save_to_file(self, file_name):
