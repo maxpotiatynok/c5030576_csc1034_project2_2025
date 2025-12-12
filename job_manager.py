@@ -31,11 +31,7 @@ class JobManager:
     def add_job(self, job):
         """Add a job to the list of jobs"""
         if job not in self.__jobs: # Check if a similar job already exists in the list
-            workers_hours = 0
-            for j in self.__jobs:
-                # Check if such job already exists
-                if j.getname() == job.getname():
-                    workers_hours += j.get_hours()
+            self.__jobs.append(job)
         else:
             raise Exception('Job already exists') # Throw an exception if the conditions above aren't met
 
