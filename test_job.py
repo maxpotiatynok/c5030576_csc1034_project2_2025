@@ -104,4 +104,14 @@ class TestJob:
         job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
         assert hash(job) == hash(job)
 
+    def test_str(self):
+        """Tests the __str__ function to see if the string representation matches"""
+        job = Job("John Brown", "Technical", 4.15, "21/10/2026", 4)
+        assert job.__str__() == 'Job: John Brown, Technical, 4.15, 21/10/2026, 4'
+
+    def test_repr(self):
+        """Tests the __repr__ function to see if the string representation matches"""
+        job = Job("John Brown", "Technical", 4.15, "21/10/2026", 4)
+        assert job.__repr__() == 'Job(John Brown, Technical, 4.15, 21/10/2026, 4)'
+
 
