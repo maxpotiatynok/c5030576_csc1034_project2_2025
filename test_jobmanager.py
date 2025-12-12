@@ -166,6 +166,7 @@ class TestJobManager:
         workers = ["Eugene O'Connor"]
         assert job_manager.get_total_cost_per_name(workers) == {"Eugene O'Connor": 0}
 
+    # Normal Case
     def test_category_count_per_name_valid(self):
         """Tests the category_count_per_name function"""
         j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
@@ -175,4 +176,9 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         assert job_manager.get_category_count_per_name() == {"Vladimir Kuznetsov": {"Human Resources": 1, "Technical":2}, "John Brown": {"Technical": 2}}
 
+    # Exceptional Case
+    def test_category_count_per_name_empty(self):
+        """Tests the category_count_per_name function where there are no matching jobs"""
+        job_manager = JobManager()
+        assert job_manager.get_category_count_per_name() == {}
 
