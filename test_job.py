@@ -18,6 +18,10 @@ class TestJob:
         parameter: dictionary
         error: typeerror 
     """
+
+    """Parametrises dictionaries with wrong data types to test typeerror"""
+    # Adapted from
+    # https://ncl.instructure.com/courses/65748/files/9980155?module_item_id=3989746
     @pytest.mark.parametrize("parameter, error", [
         (dict(name = 123, category = "Technical", rate = 13.45, date = "21/10/2026", hours = 4), TypeError),
         (dict(name = "John Brown", category = 1, rate = 13.45, date = "21/10/2026", hours = 4), TypeError),
