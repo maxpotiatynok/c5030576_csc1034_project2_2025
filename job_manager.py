@@ -45,8 +45,8 @@ class JobManager:
     def edit_job(self, old_job, new_job):
         """Edit a job in the list of jobs"""
         if old_job in self.__jobs:
-            self.__jobs.remove_job(old_job)
-            self.__jobs.add_job(new_job)
+            self.__jobs.remove(old_job)
+            self.__jobs.append(new_job)
 
     def search_by_category(self, category):
         """Search for jobs with the given category"""
