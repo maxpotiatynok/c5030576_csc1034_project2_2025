@@ -98,3 +98,10 @@ class TestJob:
         j1 = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
         j2 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
         assert j1.__eq__(j2) is False
+
+    def test_hash(self):
+        """Tests the hash function to see if the hash value matches"""
+        job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert hash(job) == hash(job)
+
+
