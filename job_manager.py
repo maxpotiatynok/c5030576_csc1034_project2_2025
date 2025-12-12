@@ -1,4 +1,7 @@
 import csv
+
+from pygments.lexers import j
+
 from job import Job
 
 class JobManager:
@@ -18,11 +21,12 @@ class JobManager:
 
     def __str__(self):
         """String representation"""
-        return f"Job manager: {self.__jobs}"
+        return "Job manager: ".join(str(j) for j in self.__jobs)
 
     def __repr__(self):
         """Formal string representation for developers"""
-        return f"Job manager({self.__jobs})"
+        list_str = "".join(str(j) for j in self.__jobs)
+        return f"Job manager({list_str})"
 
     def add_job(self, job):
         """Add a job to the list of jobs"""
