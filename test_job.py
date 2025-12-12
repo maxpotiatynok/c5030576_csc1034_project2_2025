@@ -1,5 +1,3 @@
-from unicodedata import category
-
 import pytest
 from job import Job
 class TestJob:
@@ -63,3 +61,28 @@ class TestJob:
     def test_job_constructor_invalid_hours(self):
         with pytest.raises(Exception):
             Job("John Brown", "Technical", 0, "21/10/2026", 12)
+
+    def test_get_name(self):
+        """Tests the get_name function to see if the name matches"""
+        job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert job.get_name() == "John Brown"
+
+    def test_get_category(self):
+        """Tests the get_category function to see if the category matches"""
+        job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert job.get_category() == "Technical"
+
+    def test_get_rate(self):
+        """Tests the get_rate function to see if the rate matches"""
+        job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert job.get_rate() == 4.10
+
+    def test_get_date(self):
+        """Tests the get_date function to see if the date matches"""
+        job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert job.get_date() == "21/10/2026"
+
+    def test_get_hours(self):
+        """Tests the get_hours function to see if the hours matches"""
+        job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert job.get_hours() == 4
