@@ -1,4 +1,6 @@
 import pytest
+
+import job
 from job_manager import JobManager
 from job import Job
 class TestJobManager:
@@ -41,3 +43,19 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         list_str = "".join(str(j) for j in job_list)
         assert job_manager.__repr__() == f"Job manager({list_str})"
+
+    def test_add_job_valid(self):
+        """Tests the add_job function"""
+        job_manager = JobManager()
+        job = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        job_manager.add_job(job)
+        assert job in job_manager.get_jobs()
+
+    def test_add_job_invalid(self):
+        """Tests the add_job function raises an error if an invalid job is provided"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        j2 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        with pytest.raises(Exception):
+            job_manager.add_job(j2)
