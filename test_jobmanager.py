@@ -59,3 +59,18 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         with pytest.raises(Exception):
             job_manager.add_job(j2)
+
+    def test_remove_job_valid(self):
+        """Tests the remove_job function"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        jobs_list = [j1]
+        job_manager = JobManager(jobs_list)
+        job = job_manager.remove_job(j1)
+        assert job not in job_manager.get_jobs()
+
+    def test_remove_job_invalid(self):
+        """Tests the remove_job function raises an error if an invalid job is provided"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        job_manager = JobManager()
+        with pytest.raises(Exception):
+            job_manager.remove_job(j1)
