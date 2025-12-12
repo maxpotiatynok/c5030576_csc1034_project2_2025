@@ -61,7 +61,7 @@ class JobManager:
         """Search for jobs with the given rate"""
         suitable_jobs = []
         for job in self.__jobs:
-            if job.getrate() == rate:
+            if job.get_rate() == rate:
                 suitable_jobs.append(job)
         return suitable_jobs
 
@@ -69,7 +69,7 @@ class JobManager:
         """Search for jobs with the given name and date"""
         suitable_jobs = []
         for job in self.__jobs:
-            if job.getname() == name and job.getdate() == date: # Search jobs that exactly match name and date requirements
+            if job.get_name() == name and job.get_date() == date: # Search jobs that exactly match name and date requirements
                 suitable_jobs.append(job)
         return suitable_jobs
 
@@ -77,14 +77,14 @@ class JobManager:
         """Return a dictionary that maps each name to the total cost of all jobs under this name"""
         name_cost_dict = {}
         for job in self.__jobs:
-            if job.getname() in names:
-                if job.getname() not in name_cost_dict:
+            if job.get_name() in names:
+                if job.get_name() not in name_cost_dict:
                     # Check if name is in the dictionary
                     # if not - create a new key-value pair
-                    name_cost_dict[job.getname()] = job.get_rate() * job.get_hours()
+                    name_cost_dict[job.get_name()] = job.get_rate() * job.get_hours()
                 else:
                     # if the pair exists, add job cost to the total cost
-                    name_cost_dict[job.getname()] += job.get_rate() * job.get_hours()
+                    name_cost_dict[job.get_name()] += job.get_rate() * job.get_hours()
         return name_cost_dict
 
     def get_category_count_per_name(self):
