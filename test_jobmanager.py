@@ -122,3 +122,22 @@ class TestJobManager:
         job_list = [j1]
         job_manager = JobManager(job_list)
         assert job_manager.search_by_category(13.45) == []
+
+    def test_search_by_name_and_date(self):
+        """Tests the search_by_name_and_date function"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        j2 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        assert job_manager.search_by_name_and_date("John Brown", "21/10/2026") == [j1]
+
+    @pytest.mark.parametrize("nd", [
+        dict(name = "Vladimir Kuznetsov", date = "21/10/2026"),
+        dict(name = "John Brown", date = "24/10/2026"),
+    ])
+    def test_search_by_name_and_date_empty(self,nd):
+        """Tests the search_by_name_and_date function where there are no matching jobs"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        assert job_manager.search_by_name_and_date(**nd) == []
