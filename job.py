@@ -1,6 +1,6 @@
 class Job:
-    # Constructor
     def __init__(self, name, category, rate, date, hours):
+        """Constructor"""
         if isinstance(name, str): # Check if name is a string
             self.__name = name
         else:
@@ -28,43 +28,45 @@ class Job:
         else :
             raise TypeError("Hours must be an integer")
 
-    # Get name
     def get_name(self):
+        """Get name"""
         return self.__name
 
-    # Get category
     def get_category(self):
+        """Get category"""
         return self.__category
 
-    # Get rate
     def get_rate(self):
+        """Get rate"""
         return self.__rate
 
-    # Get date
     def get_date(self):
+        """Get date"""
         return self.__date
 
-    # Get hours
     def get_hours(self):
+        """Get hours"""
         return self.__hours
 
-    # Method to check if two objects of Job class are equal
-    # Returns a boolean value(either True or False)
     def __eq__(self, other):
+        """
+            Method to check if two objects of Job class are equal
+            Returns a boolean value(either True or False)
+        """
         if self.__name == other.name:
             return True
         else:
             return False
 
-    # Returns an object's has value(integer)
     def __hash__(self):
+        """Returns an object's has value(integer)"""
         return hash(self.__name)
 
-    # String representation
     def __str__(self):
+        """String representation"""
         return f'Job: {self.__name}, {self.__category}, {self.__rate}, {self.__date}, {self.__hours}'
 
-    # Formal string representation for developers
     def __repr__(self):
+        """Formal string representation for developers"""
         return f'Job({self.__name}, {self.__category}, {self.__rate}, {self.__date}, {self.__hours})'
 
