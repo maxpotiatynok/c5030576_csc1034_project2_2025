@@ -52,7 +52,7 @@ class JobManager:
         """Search for jobs with the given category"""
         suitable_jobs = []
         for job in self.__jobs:
-            if job.getcategory() == category:
+            if job.get_category() == category:
                 suitable_jobs.append(job)
         return suitable_jobs # Return all matching jobs
 
