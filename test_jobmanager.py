@@ -241,6 +241,38 @@ class TestJobManager:
         with pytest.raises(Exception):
             job_manager.load_from_file("bad_data.csv")
 
+    def test_save_to_file(self):
+            """Tests the save_to_file function with valid input"""
+            sample_jobs = [
+                Job("Liam Foster", "Technical", 14.75, "05/03/2027", 4),
+                Job("Emily Hart", "Administration", 12.40, "12/04/2027", 5),
+                Job("Jackson Reed", "Marketing", 16.80, "19/02/2027", 3),
+                Job("Ava Mitchell", "Customer Service", 11.95, "22/03/2027", 2),
+                Job("Lucas Rivera", "Operational", 13.10, "07/05/2027", 6),
+                Job("Mila Stone", "Research Activities", 17.55, "14/04/2027", 4),
+                Job("Henry Cole", "Teaching and Learning Activities", 15.20, "28/02/2027", 3),
+                Job("Ella James", "Technical", 18.35, "10/05/2027", 1),
+                Job("Caleb Norris", "Senior Invigilation", 19.40, "03/03/2027", 2),
+                Job("Grace Wood", "Administration", 10.90, "17/04/2027", 6),
+                Job("Ethan Russell", "Marketing", 13.85, "26/03/2027", 4),
+                Job("Aria Wells", "Research Activities", 14.60, "09/05/2027", 5),
+                Job("Logan Price", "Operational", 11.70, "02/04/2027", 3),
+                Job("Sienna Blake", "Customer Service", 12.95, "21/02/2027", 4),
+                Job("Owen Carter", "Technical", 17.25, "11/03/2027", 2),
+                Job("Harper Lane", "Teaching and Learning Activities", 14.30, "06/05/2027", 5),
+                Job("Wyatt Brooks", "Senior Invigilation", 18.90, "24/04/2027", 3),
+                Job("Zoe Harrington", "Research Activities", 16.10, "15/03/2027", 2),
+                Job("Leo Hammond", "Operational", 12.60, "30/05/2027", 6),
+                Job("Nora Stephenson", "Administration", 11.50, "08/05/2027", 1)
+            ]
+            job_manager = JobManager(sample_jobs)
+            job_manager.save_to_file("sample_data.csv")
+            file_manager = JobManager()
+            file_manager.load_from_file("sample_data.csv")
+            assert sample_jobs == file_manager.get_jobs()
+
+
+
 
 
 
