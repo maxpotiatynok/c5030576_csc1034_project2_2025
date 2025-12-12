@@ -53,7 +53,7 @@ class Job:
             Method to check if two objects of Job class are equal
             Returns a boolean value(either True or False)
         """
-        if self.__name == other.name:
+        if self.__hash__() == other.__hash__():
             return True
         else:
             return False
