@@ -95,20 +95,21 @@ class TestJobManager:
         assert j2 in job_manager.get_jobs() and j1 not in job_manager.get_jobs()
         """no need to test exceptional cases as they are covered under test_remove_job_invalid and test_add_job_invalid methods"""
 
+    # Normal Case
     def test_search_by_category_valid(self):
         """Tests the search_by_category function"""
         j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
         job_list = [j1]
         job_manager = JobManager(job_list)
         assert job_manager.search_by_category("Human Resources") == [j1]
-
+    # Exceptional case
     def test_search_by_category_un(self):
         """Tests the search_by_category function where no job with such category exists"""
         j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
         job_list = [j1]
         job_manager = JobManager(job_list)
         assert job_manager.search_by_category("Technical") == []
-
+    # Normal Case
     def test_search_by_rate_valid(self):
         """Tests the search_by_rate function"""
         j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
@@ -116,6 +117,7 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         assert job_manager.search_by_rate(14.10) == [j1]
 
+    # Exceptional Case
     def test_search_by_rate_un(self):
         """Tests the search_by_rate function where no job with such rate exists"""
         j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
@@ -123,6 +125,7 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         assert job_manager.search_by_category(13.45) == []
 
+    # Normal Case
     def test_search_by_name_and_date(self):
         """Tests the search_by_name_and_date function"""
         j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -135,9 +138,32 @@ class TestJobManager:
         dict(name = "Vladimir Kuznetsov", date = "21/10/2026"),
         dict(name = "John Brown", date = "24/10/2026"),
     ])
+    # Exceptional Case
     def test_search_by_name_and_date_empty(self,nd):
         """Tests the search_by_name_and_date function where there are no matching jobs"""
         j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
         job_list = [j1]
         job_manager = JobManager(job_list)
         assert job_manager.search_by_name_and_date(**nd) == []
+
+    # Normal Case
+    def test_total_cost_valid(self):
+        """Tests the total_cost function"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        j2 = Job("John Brown", "Technical", 13.45, "21/10/2026", 3)
+        job_list = [j1, j2]
+        job_manager = JobManager(job_list)
+        workers = ["John Brown"]
+        assert job_manager.get_total_cost_per_name(workers) == {"John Brown": (13.45*4) + (13.45*3)}
+
+    # Exceptional Case
+    def test_total_cost_un(self):
+        """Tests the total_cost function where no job with such name exists"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        j2 = Job("John Brown", "Technical", 13.45, "21/10/2026", 3)
+        job_list = [j1, j2]
+        job_manager = JobManager(job_list)
+        workers = ["Eugene O'Connor"]
+        assert job_manager.get_total_cost_per_name(workers) == {"Eugene O'Connor": 0}
+
+
