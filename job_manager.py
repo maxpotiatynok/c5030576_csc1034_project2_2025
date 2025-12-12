@@ -76,16 +76,14 @@ class JobManager:
     def get_total_cost_per_name(self, names):
         """Return a dictionary that maps each name to the total cost of all jobs under this name"""
         name_cost_dict = {}
+        for name in names:
+            name_cost_dict[name] = 0
         for job in self.__jobs:
-            if job.get_name() in names:
-                if job.get_name() not in name_cost_dict:
-                    # Check if name is in the dictionary
-                    # if not - create a new key-value pair
-                    name_cost_dict[job.get_name()] = job.get_rate() * job.get_hours()
-                else:
-                    # if the pair exists, add job cost to the total cost
-                    name_cost_dict[job.get_name()] += job.get_rate() * job.get_hours()
+            if job.get_name() in str(names):
+                # if the pair exists, add job cost to the total cost
+                name_cost_dict[job.get_name()] += job.get_rate() * job.get_hours()
         return name_cost_dict
+
 
     def get_category_count_per_name(self):
         """Return a dictionary that maps name to dictionary that maps each category to the number of jobs of that category"""
