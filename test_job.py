@@ -86,3 +86,15 @@ class TestJob:
         """Tests the get_hours function to see if the hours matches"""
         job = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
         assert job.get_hours() == 4
+
+    def test_equal_objects(self):
+        """Tests the equal_objects to see if the output is True"""
+        j1 = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        j2 = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        assert j1.__eq__(j2) is True
+
+    def test_unequal_objects(self):
+        """Tests the unequal_objects to see if the output is False"""
+        j1 = Job("John Brown", "Technical", 4.10, "21/10/2026", 4)
+        j2 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        assert j1.__eq__(j2) is False
