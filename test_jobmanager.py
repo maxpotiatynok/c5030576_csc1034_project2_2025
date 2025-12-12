@@ -93,4 +93,19 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         job_manager.edit_job(j1, j2)
         assert j2 in job_manager.get_jobs() and j1 not in job_manager.get_jobs()
-    """no need to test exceptional cases as they are covered under test_remove_job_invalid and test_add_job_invalid methods"""
+        """no need to test exceptional cases as they are covered under test_remove_job_invalid and test_add_job_invalid methods"""
+
+    def test_search_by_category_valid(self):
+        """Tests the search_by_category function"""
+        j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        assert job_manager.search_by_category("Human Resources") == [j1]
+
+    def test_search_by_category_un(self):
+        """Tests the search_by_category function where no job with such category exists"""
+        j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        assert job_manager.search_by_category("Technical") == []
+
