@@ -109,3 +109,16 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         assert job_manager.search_by_category("Technical") == []
 
+    def test_search_by_rate_valid(self):
+        """Tests the search_by_rate function"""
+        j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        assert job_manager.search_by_rate(14.10) == [j1]
+
+    def test_search_by_rate_un(self):
+        """Tests the search_by_rate function where no job with such rate exists"""
+        j1 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        assert job_manager.search_by_category(13.45) == []
