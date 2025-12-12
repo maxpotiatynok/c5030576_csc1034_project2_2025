@@ -1,3 +1,5 @@
+import csv
+
 import pytest
 
 import job
@@ -181,4 +183,66 @@ class TestJobManager:
         """Tests the category_count_per_name function where there are no matching jobs"""
         job_manager = JobManager()
         assert job_manager.get_category_count_per_name() == {}
+
+    # Normal case
+    def test_load_from_file_valid(self):
+        """Tests the load_from_file function"""
+        job_manager = JobManager()
+        job_manager.load_from_file("sample_data.csv")
+        sample_jobs = [
+            Job("Aiden Clarke", "Technical", 14.32, "03/08/2024", 3),
+            Job("Maya Bennett", "Administration", 12.84, "12/07/2024", 5),
+            Job("Elias Turner", "Research Activities", 17.45, "28/07/2024", 2),
+            Job("Sophie Hall", "Marketing", 15.67, "09/08/2024", 4),
+            Job("Noah Patel", "Operational", 11.98, "21/07/2024", 6),
+            Job("Ruby Dawson", "Customer Service", 13.74, "04/08/2024", 1),
+            Job("Leo Marsh", "Senior Invigilation", 19.12, "18/07/2024", 3),
+            Job("Chloe Grant", "Technical", 16.53, "06/08/2024", 2),
+            Job("Oscar Webb", "Teaching and Learning Activities", 11.44, "01/08/2024", 5),
+            Job("Isla Kerr", "Research Activities", 18.27, "25/07/2024", 4),
+            Job("Finn Collins", "Administration", 10.95, "29/07/2024", 6),
+            Job("Zara Hughes", "Marketing", 17.63, "03/07/2024", 1),
+            Job("Arlo Spence", "Operational", 12.14, "11/08/2024", 5),
+            Job("Freya Morton", "Technical", 14.89, "30/07/2024", 2),
+            Job("Hugo Bishop", "Customer Service", 13.05, "07/08/2024", 6),
+            Job("Ivy Lambert", "Research Activities", 18.92, "15/07/2024", 3),
+            Job("Jude Harris", "Administration", 10.78, "19/07/2024", 4),
+            Job("Luna Reeves", "Senior Invigilation", 16.34, "26/07/2024", 1),
+            Job("Caleb Foster", "Operational", 12.67, "05/08/2024", 3),
+            Job("Nina Watts", "Teaching and Learning Activities", 15.21, "02/08/2024", 5)
+        ]
+        assert job_manager.get_jobs() == sample_jobs
+
+    def test_load_from_file_invalid(self):
+        """Tests the load_from_file function with invalid input"""
+        job_manager = JobManager()
+        sample_jobs = [
+            Job("Aiden Clarke", "Technical", 14.32, "03/08/2024", 3),
+            Job("Maya Bennett", "Administration", 12.84, "12/07/2024", 5),
+            Job("Elias Turner", "Research Activities", 17.45, "28/07/2024", 2),
+            Job("Sophie Hall", "Marketing", 15.67, "09/08/2024", 4),
+            Job("Noah Patel", "Operational", 11.98, "21/07/2024", 6),
+            Job("Ruby Dawson", "Customer Service", 13.74, "04/08/2024", 1),
+            Job("Leo Marsh", "Senior Invigilation", 19.12, "18/07/2024", 3),
+            Job("Chloe Grant", "Technical", 16.53, "06/08/2024", 2),
+            Job("Oscar Webb", "Teaching and Learning Activities", 11.44, "01/08/2024", 5),
+            Job("Isla Kerr", "Research Activities", 18.27, "25/07/2024", 4),
+            Job("Finn Collins", "Administration", 10.95, "29/07/2024", 6),
+            Job("Zara Hughes", "Marketing", 17.63, "03/07/2024", 1),
+            Job("Arlo Spence", "Operational", 12.14, "11/08/2024", 5),
+            Job("Freya Morton", "Technical", 14.89, "30/07/2024", 2),
+            Job("Hugo Bishop", "Customer Service", 13.05, "07/08/2024", 6),
+            Job("Ivy Lambert", "Research Activities", 18.92, "15/07/2024", 3),
+            Job("Jude Harris", "Administration", 10.78, "19/07/2024", 4),
+            Job("Luna Reeves", "Senior Invigilation", 16.34, "26/07/2024", 1),
+            Job("Caleb Foster", "Operational", 12.67, "05/08/2024", 3),
+            Job("Nina Watts", "Teaching and Learning Activities", 15.21, "02/08/2024", 5)
+        ]
+        with pytest.raises(Exception):
+            job_manager.load_from_file("bad_data.csv")
+
+
+
+
+
 
