@@ -89,15 +89,22 @@ class JobManager:
         """Return a dictionary that maps name to dictionary that maps each category to the number of jobs of that category"""
         cat_c_n_dict = {}
         for job in self.__jobs:
-            if job.name not in cat_c_n_dict:
+            cat_j_dict = {}
+            if job.get_name() not in cat_c_n_dict:
                 cat = 0
-                cat_j_dict = {}
-                for category in job.categories:
-                    if job.category == category:
+                for jobs in self.__jobs:
+                    if job.get_category() == jobs.get_category():
                         # Count the amount of jobs in the same category for the same name
                         cat = cat + 1
-                cat_j_dict[job.category] = cat
-                cat_c_n_dict[job.category] = cat_j_dict[job.category]
+                cat_j_dict[job.get_category()] = cat
+                cat_c_n_dict[job.get_name()] = {job.get_category(): cat_j_dict[job.get_category()]}
+            else:
+                cat = 0
+                for jobs in self.__jobs:
+                    if job.get_category() == jobs.get_category():
+                        # Count the amount of jobs in the same category for the same name
+                        cat = cat + 1
+                        cat_c_n_dict[job.get_name()][job.get_category()] = cat # Add a new inner pair
         return cat_c_n_dict
 
     def load_from_file(self, file_name):
