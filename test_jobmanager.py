@@ -244,6 +244,28 @@ class TestJobManager:
     def test_save_to_file(self):
             """Tests the save_to_file function with valid input"""
             sample_jobs = [
+                Job("Aiden Clarke", "Technical", 14.32, "03/08/2024", 3),
+                Job("Maya Bennett", "Administration", 12.84, "12/07/2024", 5),
+                Job("Elias Turner", "Research Activities", 17.45, "28/07/2024", 2),
+                Job("Sophie Hall", "Marketing", 15.67, "09/08/2024", 4),
+                Job("Noah Patel", "Operational", 11.98, "21/07/2024", 6),
+                Job("Ruby Dawson", "Customer Service", 13.74, "04/08/2024", 1),
+                Job("Leo Marsh", "Senior Invigilation", 19.12, "18/07/2024", 3),
+                Job("Chloe Grant", "Technical", 16.53, "06/08/2024", 2),
+                Job("Oscar Webb", "Teaching and Learning Activities", 11.44, "01/08/2024", 5),
+                Job("Isla Kerr", "Research Activities", 18.27, "25/07/2024", 4),
+                Job("Finn Collins", "Administration", 10.95, "29/07/2024", 6),
+                Job("Zara Hughes", "Marketing", 17.63, "03/07/2024", 1),
+                Job("Arlo Spence", "Operational", 12.14, "11/08/2024", 5),
+                Job("Freya Morton", "Technical", 14.89, "30/07/2024", 2),
+                Job("Hugo Bishop", "Customer Service", 13.05, "07/08/2024", 6),
+                Job("Ivy Lambert", "Research Activities", 18.92, "15/07/2024", 3),
+                Job("Jude Harris", "Administration", 10.78, "19/07/2024", 4),
+                Job("Luna Reeves", "Senior Invigilation", 16.34, "26/07/2024", 1),
+                Job("Caleb Foster", "Operational", 12.67, "05/08/2024", 3),
+                Job("Nina Watts", "Teaching and Learning Activities", 15.21, "02/08/2024", 5)
+                ]
+            sample_new_jobs = [
                 Job("Liam Foster", "Technical", 14.75, "05/03/2027", 4),
                 Job("Emily Hart", "Administration", 12.40, "12/04/2027", 5),
                 Job("Jackson Reed", "Marketing", 16.80, "19/02/2027", 3),
@@ -265,10 +287,18 @@ class TestJobManager:
                 Job("Leo Hammond", "Operational", 12.60, "30/05/2027", 6),
                 Job("Nora Stephenson", "Administration", 11.50, "08/05/2027", 1)
             ]
-            job_manager = JobManager(sample_jobs)
+            """Puts sample data into the file"""
+            filler = JobManager(sample_jobs)
+            filler.save_to_file("sample_data.csv")
+
+            """loading new data to the file"""
+            job_manager = JobManager(sample_new_jobs)
             job_manager.save_to_file("sample_data.csv")
+
+            """downloading new data from the file"""
             file_manager = JobManager()
             file_manager.load_from_file("sample_data.csv")
+            """comparing them"""
             assert sample_jobs == file_manager.get_jobs()
 
 
