@@ -5,6 +5,7 @@ from job_manager import JobManager
 from job import Job
 class TestJobManager:
     """Tests the JobManager class"""
+    # Normal case
     def test_init_full(self):
         """Tests the constructor by using a list as a parameter"""
         job1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -13,11 +14,13 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         assert isinstance(job_manager, JobManager)
 
+    # Exceptional case
     def test_init_empty(self):
         """Tests the constructor by not using a list as a parameter"""
         job_manager = JobManager()
         assert isinstance(job_manager, JobManager)
 
+    # Normal case
     def test_get_job(self):
         """Tests the get_job function"""
         job1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -26,6 +29,7 @@ class TestJobManager:
         job_manager = JobManager(job_list)
         assert job_manager.get_jobs() == [job1, job2]
 
+    # Normal case
     def test_str(self):
         """Tests the __str__ function"""
         job1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -35,6 +39,7 @@ class TestJobManager:
         assert job_manager.__str__() == "Job manager: ".join(str(j) for j in job_list) # Compares .__str__() method
         # with the list converted to the string
 
+    # Normal case
     def test_repr(self):
         """Tests the __repr__ function"""
         job1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -44,6 +49,7 @@ class TestJobManager:
         list_str = "".join(str(j) for j in job_list)
         assert job_manager.__repr__() == f"Job manager({list_str})"
 
+    # Normal case
     def test_add_job_valid(self):
         """Tests the add_job function"""
         job_manager = JobManager()
@@ -51,6 +57,7 @@ class TestJobManager:
         job_manager.add_job(job)
         assert job in job_manager.get_jobs()
 
+    # Exceptional case
     def test_add_job_invalid(self):
         """Tests the add_job function raises an error if an invalid job is provided"""
         j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -60,6 +67,7 @@ class TestJobManager:
         with pytest.raises(Exception):
             job_manager.add_job(j2)
 
+    # Normal case
     def test_remove_job_valid(self):
         """Tests the remove_job function"""
         j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
@@ -68,9 +76,21 @@ class TestJobManager:
         job = job_manager.remove_job(j1)
         assert job not in job_manager.get_jobs()
 
+    # Exceptional case
     def test_remove_job_invalid(self):
         """Tests the remove_job function raises an error if an invalid job is provided"""
         j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
         job_manager = JobManager()
         with pytest.raises(Exception):
             job_manager.remove_job(j1)
+
+    # Normal case
+    def test_edit_job(self):
+        """Tests the edit_job function"""
+        j1 = Job("John Brown", "Technical", 13.45, "21/10/2026", 4)
+        j2 = Job("Vladimir Kuznetsov", "Human Resources", 14.10, "24/10/2026", 6)
+        job_list = [j1]
+        job_manager = JobManager(job_list)
+        job_manager.edit_job(j1, j2)
+        assert j2 in job_manager.get_jobs() and j1 not in job_manager.get_jobs()
+    """no need to test exceptional cases as they are covered under test_remove_job_invalid and test_add_job_invalid methods"""
